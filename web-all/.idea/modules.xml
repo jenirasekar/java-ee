@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/code/code.iml" filepath="$PROJECT_DIR$/code/code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-xml/demo-xml.iml" filepath="$PROJECT_DIR$/demo-xml/demo-xml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo03-servletConfig-servletContext/demo03-servletConfig-servletContext.iml" filepath="$PROJECT_DIR$/demo03-servletConfig-servletContext/demo03-servletConfig-servletContext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo04-forward-redirect/demo04-forward-redirect.iml" filepath="$PROJECT_DIR$/demo04-forward-redirect/demo04-forward-redirect.iml" />
       <module fileurl="file://$PROJECT_DIR$/web-all.iml" filepath="$PROJECT_DIR$/web-all.iml" />
       <module fileurl="file://$PROJECT_DIR$/web01/web01.iml" filepath="$PROJECT_DIR$/web01/web01.iml" />
       <module fileurl="file://$PROJECT_DIR$/web02/web02.iml" filepath="$PROJECT_DIR$/web02/web02.iml" />
