@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    <servlet>
+        <servlet-name>ServletA</servlet-name>
+        <servlet-class>com.jenira.servlet.ServletA</servlet-class>
+        <!-- Configure initial parameters for com.jenira.servlet.ServletA -->
+        <init-param>
+            <param-name>param1</param-name>
+            <param-value>value1</param-value>
+        </init-param>
+        <init-param>
+            <param-name>param2</param-name>
+            <param-value>value2</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ServletB</servlet-name>
+        <servlet-class>com.jenira.servlet.ServletB</servlet-class>
+        <!-- Configure initial parameters for com.jenira.servlet.ServletB -->
+        <init-param>
+            <param-name>param3</param-name>
+            <param-value>value3</param-value>
+        </init-param>
+        <init-param>
+            <param-name>param4</param-name>
+            <param-value>value4</param-value>
+        </init-param>
+    </servlet>
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>ServletA</servlet-name>-->
+<!--        <url-pattern>/servletA</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>ServletB</servlet-name>-->
+<!--        <url-pattern>/servletB</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    ServletContext-->
+    <context-param>
+        <param-name>paramA</param-name>
+        <param-value>valueA</param-value>
+    </context-param>
+    <context-param>
+        <param-name>paramB</param-name>
+        <param-value>valueB</param-value>
+    </context-param>
+</web-app>
