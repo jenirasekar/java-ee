@@ -31,15 +31,15 @@
         </init-param>
     </servlet>
 
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>ServletA</servlet-name>-->
-<!--        <url-pattern>/servletA</url-pattern>-->
-<!--    </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>ServletA</servlet-name>
+        <url-pattern>/servletA</url-pattern>
+    </servlet-mapping>
 
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>ServletB</servlet-name>-->
-<!--        <url-pattern>/servletB</url-pattern>-->
-<!--    </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>ServletB</servlet-name>
+        <url-pattern>/servletB</url-pattern>
+    </servlet-mapping>
 
 <!--    ServletContext-->
     <context-param>
