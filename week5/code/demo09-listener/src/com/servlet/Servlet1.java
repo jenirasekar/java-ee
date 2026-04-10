@@ -14,6 +14,6 @@ public class Servlet1 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletContext application = this.getServletContext();
-        application.setAttribute("keya","valuea");
+        application.setAttribute("user","lin ying");
     }
 }
