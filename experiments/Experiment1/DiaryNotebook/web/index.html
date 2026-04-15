@@ -52,6 +52,7 @@
             <div class="modal-body">
                 <input type="hidden" id="entryId">
 
+                <p id="extraInfo" class="text-muted small"></p>
                 <input type="text" id="title" class="form-control mb-2" placeholder="Title">
                 <textarea id="content" class="form-control" rows="5" placeholder="Write here..."></textarea>
             </div>
@@ -73,7 +74,7 @@
     let rowsPerPage = 5;
 
     // SAVE (CREATE / UPDATE)
-    function saveEntry() {
+    async function saveEntry() {
         let id = document.getElementById("entryId").value;
         let title = document.getElementById("title").value;
         let content = document.getElementById("content").value;
@@ -84,15 +85,26 @@
         }
 
         if (id) {
-            // UPDATE
+            // UPDATE (keep existing IP)
             entries = entries.map(e => e.id == id ? { ...e, title, content } : e);
         } else {
+            // FETCH IP ADDRESS
+            let ip = "Unknown";
+            try {
+                let res = await fetch("https://api.ipify.org?format=json");
+                let data = await res.json();
+                ip = data.ip;
+            } catch (error) {
+                console.log("IP fetch failed");
+            }
+
             // CREATE
             entries.unshift({
                 id: Date.now(),
                 title,
                 content,
-                date: new Date().toLocaleString()
+                date: new Date().toLocaleString(),
+                ip: ip
             });
         }
 
@@ -114,15 +126,20 @@
     function viewEntry(id) {
         let entry = entries.find(e => e.id == id);
 
-        document.getElementById("modalTitle").innerText = "View Diary";
+        document.getElementById("modalTitle").innerText = "Diary Details";
         document.getElementById("entryId").value = entry.id;
+
         document.getElementById("title").value = entry.title;
+        document.getElementById("extraInfo").innerText =
+            "Created: " + entry.date + " | IP: " + entry.ip;
         document.getElementById("content").value = entry.content;
+
+        // Add IP display
+        // alert("Created at: " + entry.date + "\nIP: " + entry.ip);
 
         document.getElementById("title").disabled = true;
         document.getElementById("content").disabled = true;
 
-        // Open modal
         new bootstrap.Modal(document.getElementById("entryModal")).show();
     }
 
