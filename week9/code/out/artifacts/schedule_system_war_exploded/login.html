@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+
+        .ht{
+            text-align: center;
+            color: cadetblue;
+            font-family: YouYuan;
+        }
+        .tab{
+            width: 500px;
+            border: 5px solid cadetblue;
+            margin: 0px auto;
+            border-radius: 5px;
+            font-family: YouYuan;
+        }
+        .ltr td{
+            border: 1px solid powderblue;
+
+        }
+        .ipt{
+            border: 0px;
+            width: 50%;
+
+        }
+        .btn1{
+            border: 2px solid powderblue;
+            border-radius: 4px;
+            width:60px;
+            background-color: antiquewhite;
+
+        }
+        #usernameMsg , #userPwdMsg {
+            color: rgb(230, 87, 51);
+        }
+
+        .buttonContainer{
+            text-align: center;
+        }
+    </style>
+    <script>
+        // Check whether the username format is valid
+        function checkUsername(){
+            var usernameReg = /^[a-zA-Z0-9]{5,10}$/;
+            var usernameInput = document.getElementById("usernameInput");
+            var username = usernameInput.value;
+            var usernameMsg = document.getElementById("usernameMsg");
+
+            if(!usernameReg.test(username)){
+                usernameMsg.innerText = "Invalid username format";
+                return false;
+            }
+
+            usernameMsg.innerText = "OK";
+            return true;
+        }
+
+        // Check whether the password format is valid
+        function checkUserPwd(){
+            var userPwdReg = /^[0-9]{6}$/;
+            var userPwdInput = document.getElementById("userPwdInput");
+            var userPwd = userPwdInput.value;
+            var userPwdMsg = document.getElementById("userPwdMsg");
+
+            if(!userPwdReg.test(userPwd)){
+                userPwdMsg.innerText = "Password must be 6 digits";
+                return false;
+            }
+
+            userPwdMsg.innerText = "OK";
+            return true;
+        }
+
+        // Validate before form submission
+        function checkForm(){
+            var flag1 = checkUsername();
+            var flag2 = checkUserPwd();
+
+            return flag1 && flag2;
+        }
+
+    </script>
+
+</head>
+<body>
+<h1 class="ht">Welcome to the Schedule Management System</h1>
+<h3 class="ht">Please Login</h3>
+
+<form method="post" action="/user/login" onsubmit="return checkForm()">
+    <table class="tab" cellspacing="0px">
+        <tr class="ltr">
+            <td>Username</td>
+            <td>
+                <input class="ipt" type="text" id="usernameInput" name="username" onblur="checkUsername()">
+                <span id="usernameMsg"></span>
+            </td>
+        </tr>
+        <tr class="ltr">
+            <td>Password</td>
+            <td>
+                <input class="ipt" type="password" id="userPwdInput" name="userPwd" onblur="checkUserPwd()">
+                <span id="userPwdMsg"></span>
+            </td>
+        </tr>
+        <tr class="ltr">
+            <td colspan="2" class="buttonContainer">
+                <input class="btn1" type="submit" value="Login">
+                <input class="btn1" type="reset" value="Reset">
+                <button class="btn1"><a href="regist.html">Register</a></button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<!--This page implements a login interface with basic front-end validation.
+It checks the username and password format using JavaScript before submitting the form to the server.-->

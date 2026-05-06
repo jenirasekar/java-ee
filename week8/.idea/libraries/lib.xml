@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/code/demo-jdbc/lib/slf4j-api-2.0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/code/demo-jdbc/lib/hamcrest-2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/code/demo-jdbc/lib/junit-4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/code/demo-jdbc/lib/druid-1.2.18.jar!/" />
+      <root url="jar://$PROJECT_DIR$/code/demo-jdbc/lib/HikariCP-5.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/code/demo-jdbc/lib/mysql-connector-java-8.0.26.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

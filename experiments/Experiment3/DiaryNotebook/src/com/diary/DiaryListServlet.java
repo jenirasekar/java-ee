@@ -106,7 +106,7 @@ public class DiaryListServlet extends HttpServlet {
                     out.println("class='btn btn-sm btn-danger' ");
                     out.println("onclick=\"return confirm('Delete this diary?')\">Delete</a>");
 //                }
-                out.println("</td>");   
+                out.println("</td>");
                 out.println("</tr>");
             }
         }

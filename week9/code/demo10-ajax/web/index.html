@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax Demo</title>
+
+    <script>
+        // This function will be executed when the button is clicked.
+        function loadXMLDoc() {
+
+            // 1. Create an XMLHttpRequest object.
+            // This object is used to send an Ajax request to the server.
+            var xmlhttp = new XMLHttpRequest();
+
+            // 2. Set the callback function.
+            // This function will be called automatically when the request state changes.
+            xmlhttp.onreadystatechange = function () {
+
+                // readyState == 4 means the request has finished.
+                // status == 200 means the server responded successfully.
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                    // 3. Get the input element by its id.
+                    var inputEle = document.getElementById("myDiv");
+
+                    // 4. Put the server response text into the input box.
+                    inputEle.value = xmlhttp.responseText;
+                }
+            };
+
+            // 5. Set the request method and request URL.
+            // "GET" means this is a GET request.
+            // "/hello?username=zhangsan" means sending a request to /hello
+            // and passing the parameter username=zhangsan.
+            // true means this is an asynchronous request.
+            xmlhttp.open("GET", "/demo10_ajax/hello?username=zhangsan", true);
+            // 6. Send the request.
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+
+<script>
+    function loadXMLDoc() {
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("myDiv").value = xmlhttp.responseText;
+            }
+        };
+
+        xmlhttp.open("GET", "/demo10_ajax/hello?username=zhangsan", true);
+        xmlhttp.send();
+    }
+</script>
+
+<button onclick="loadXMLDoc()">button</button>
+<input type="text" id="myDiv" />
+
+</body>
+</html>

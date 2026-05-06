@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+
+        .ht{
+            text-align: center;
+            color: cadetblue;
+            font-family: YouYuan;
+        }
+        .tab{
+            width: 500px;
+            border: 5px solid cadetblue;
+            margin: 0px auto;
+            border-radius: 5px;
+            font-family: YouYuan;
+        }
+        .ltr td{
+            border: 1px solid powderblue;
+
+        }
+        .ipt{
+            border: 0px;
+            width: 50%;
+
+        }
+        .btn1{
+            border: 2px solid powderblue;
+            border-radius: 4px;
+            width:60px;
+            background-color: antiquewhite;
+
+        }
+
+        .msg {
+            color: gold;
+        }
+
+        .buttonContainer{
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        function checkUsername(){
+            var usernameReg = /^[a-zA-Z0-9]{5,10}$/;
+            var usernameInput = document.getElementById("usernameInput");
+            var username = usernameInput.value;
+            var usernameMsg = document.getElementById("usernameMsg");
+
+            if(!usernameReg.test(username)){
+                usernameMsg.innerText = "Invalid format";
+                return false;
+            }
+
+            // Send an Ajax request to check whether the username is already used.
+            var request;
+            if(window.XMLHttpRequest){
+                request= new XMLHttpRequest();
+            }else{
+                request= new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            request.onreadystatechange= function (){
+                // request.readyState == 4 means the request has finished and the response has been received.
+                // request.status == 200 means the backend response status code is 200.
+                if(request.readyState == 4  && request.status== 200){
+                    // Convert the JSON string returned by the backend into a frontend object.
+                    var response =JSON.parse(request.responseText)
+                    console.log(response)
+                    // Check whether the business code is 200.
+                    if (response.code == 200){
+                        usernameMsg.innerText = "Username available";
+                        return true;
+                    } else {
+                        usernameMsg.innerText = "Already used";
+                        return false;
+                    }
+                }
+            }
+            // Set the request method, requested resource path, and whether it is an asynchronous request.
+            request.open("GET",'/user/checkUsernameUsed?username='+username,true)
+            // Send the request.
+            request.send();
+
+
+            // All previous validations have passed.
+            // usernameMsgSpan.innerText="OK"
+            // return true
+
+            // usernameMsg.innerText = "OK";
+            return true;
+        }
+
+        function checkUserPwd(){
+            var userPwdReg = /^\d{6}$/;
+            var userPwdInput = document.getElementById("userPwdInput");
+            var userPwd = userPwdInput.value;
+            var userPwdMsg = document.getElementById("userPwdMsg");
+
+            if(!userPwdReg.test(userPwd)){
+                userPwdMsg.innerText = "Invalid format";
+                return false;
+            }
+            userPwdMsg.innerText = "OK";
+            return true;
+        }
+
+        function checkReUserPwd(){
+            var userPwdReg = /^\d{6}$/;
+
+            var reUserPwdInput = document.getElementById("reUserPwdInput");
+            var reUserPwd = reUserPwdInput.value;
+            var reUserPwdMsg = document.getElementById("reUserPwdMsg");
+
+            if(!userPwdReg.test(reUserPwd)){
+                reUserPwdMsg.innerText = "Invalid format";
+                return false;
+            }
+
+            var userPwdInput = document.getElementById("userPwdInput");
+            var userPwd = userPwdInput.value;
+
+            if(reUserPwd != userPwd){
+                reUserPwdMsg.innerText = "Passwords do not match";
+                return false;
+            }
+
+            reUserPwdMsg.innerText = "OK";
+            return true;
+        }
+
+        function checkForm(){
+            var flag1 = checkUsername();
+            var flag2 = checkUserPwd();
+            var flag3 = checkReUserPwd();
+
+            return flag1 && flag2 && flag3;
+        }
+    </script>
+
+</head>
+<body>
+<h1 class="ht">Welcome to the Schedule Management System</h1>
+<h3 class="ht">Please Register</h3>
+
+<form method="post" action="/user/regist" onsubmit="return checkForm()">
+    <table class="tab" cellspacing="0px">
+        <tr class="ltr">
+            <td>Username</td>
+            <td>
+                <input class="ipt" id="usernameInput" type="text" name="username" onblur="checkUsername()">
+                <span id="usernameMsg" class="msg"></span>
+            </td>
+        </tr>
+        <tr class="ltr">
+            <td>Password</td>
+            <td>
+                <input class="ipt" id="userPwdInput" type="password" name="userPwd" onblur="checkUserPwd()">
+                <span id="userPwdMsg" class="msg"></span>
+            </td>
+        </tr>
+        <tr class="ltr">
+            <td>Confirm Password</td>
+            <td>
+                <input class="ipt" id="reUserPwdInput" type="password" onblur="checkReUserPwd()">
+                <span id="reUserPwdMsg" class="msg"></span>
+            </td>
+        </tr>
+        <tr class="ltr">
+            <td colspan="2" class="buttonContainer">
+                <input class="btn1" type="submit" value="Register">
+                <input class="btn1" type="reset" value="Reset">
+                <button class="btn1"><a href="login.html">Go to Login</a></button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<!--This page implements a user registration interface with front-end validation, including username format checking, password format checking, and password confirmation consistency.-->

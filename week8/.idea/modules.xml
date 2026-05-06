@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/code/demo-jdbc/demo-jdbc.iml" filepath="$PROJECT_DIR$/code/demo-jdbc/demo-jdbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/demo-xml/demo-xml.iml" filepath="$PROJECT_DIR$/code/demo-xml/demo-xml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/demo03-servletConfig-servletContext/demo03-servletConfig-servletContext.iml" filepath="$PROJECT_DIR$/code/demo03-servletConfig-servletContext/demo03-servletConfig-servletContext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/demo04-forward-redirecrt/demo04-forward-redirecrt.iml" filepath="$PROJECT_DIR$/code/demo04-forward-redirecrt/demo04-forward-redirecrt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/demo06-cookie-session/demo06-cookie-session.iml" filepath="$PROJECT_DIR$/code/demo06-cookie-session/demo06-cookie-session.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/demo07-yu/demo07-yu.iml" filepath="$PROJECT_DIR$/code/demo07-yu/demo07-yu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/demo08-filter/demo08-filter.iml" filepath="$PROJECT_DIR$/code/demo08-filter/demo08-filter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/demo09-listener/demo09-listener.iml" filepath="$PROJECT_DIR$/code/demo09-listener/demo09-listener.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/schedule-system/schedule-system.iml" filepath="$PROJECT_DIR$/code/schedule-system/schedule-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/week8.iml" filepath="$PROJECT_DIR$/.idea/week8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/demo-xml/xml_r/xml_r.iml" filepath="$PROJECT_DIR$/code/demo-xml/xml_r/xml_r.iml" />
+    </modules>
+  </component>
+</project>

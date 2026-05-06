@@ -1,0 +1,5 @@
+*.exe
+*.msi
+.idea/
+out/
+*.class
