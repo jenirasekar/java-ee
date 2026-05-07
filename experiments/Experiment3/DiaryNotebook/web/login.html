@@ -10,6 +10,17 @@
 <div class="container mt-5">
     <h2>Login</h2>
 
+    <script>
+        if (new URLSearchParams(window.location.search).get('error') === '1') {
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('errorMsg').style.display = 'block';
+            });
+        }
+    </script>
+    <div id="errorMsg" class="alert alert-danger" style="display:none;">
+        Username cannot be empty.
+    </div>
+
     <form action="login" method="post">
         <div class="mb-3">
             <label>Username</label>

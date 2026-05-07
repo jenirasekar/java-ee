@@ -7,6 +7,22 @@ import java.io.*;
 
 @WebServlet("/edit")
 public class EditDiaryServlet extends HttpServlet {
+    private String esc(String s) {
+        if (s == null) return "";
+        return s.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;");
+    }
+
+    private File getSafeFile(String param, String diaryPath) throws IOException {
+        String fileName = new File(param).getName(); // strip path separators
+        File file = new File(diaryPath, fileName);
+        if (!file.getCanonicalPath().startsWith(new File(diaryPath).getCanonicalPath())) {
+            return null; // outside diary directory
+        }
+        return file;
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -81,38 +97,44 @@ public class EditDiaryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+        String user = (String) session.getAttribute("user");
+        if (user == null) {
+            response.sendRedirect("login.html");
+            return;
+        }
+
         request.setCharacterEncoding("UTF-8");
 
-        String fileName = request.getParameter("file");
-        String title = request.getParameter("title");
+        String diaryPath = getServletContext().getRealPath("/diary");
+        File file = getSafeFile(request.getParameter("file"), diaryPath);
+
+        if (file == null || !file.exists()) {
+            response.sendError(404, "Diary not found");
+            return;
+        }
+
+        String title   = request.getParameter("title");
         String content = request.getParameter("content");
 
-        String path = getServletContext().getRealPath("/diary");
-        File file = new File(path, fileName);
-
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-
-        String date = "";
-        String ip = "";
+        // preserve original date and IP
+        String date = "", ip = "";
         String line;
-
-        while ((line = reader.readLine()) != null) {
-            if (line.startsWith("Date: ")) {
-                date = line.substring(6);
-            } else if (line.startsWith("IP: ")) {
-                ip = line.substring(4);
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Date: ")) date = line.substring(6);
+                else if (line.startsWith("IP: ")) ip  = line.substring(4);
             }
         }
-        reader.close();
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-
-        writer.write("Title: " + title + "\n");
-        writer.write("Date: " + date + "\n");
-        writer.write("IP: " + ip + "\n");
-        writer.write("Content:\n" + content);
-
-        writer.close();
+        try (BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(file), "UTF-8"))) {
+            writer.write("Title: " + title + "\n");
+            writer.write("Date: " + date + "\n");
+            writer.write("IP: " + ip + "\n");
+            writer.write("Content:\n" + content);
+        }
 
         response.sendRedirect("index");
     }

@@ -17,9 +17,10 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
 
         // create session
-        HttpSession session = request.getSession();
-        session.setAttribute("user", username);
-
+        if (username != null && !username.trim().isEmpty()) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", username);
+        }
         response.sendRedirect("index");
     }
 }

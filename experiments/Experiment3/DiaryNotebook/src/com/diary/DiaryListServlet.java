@@ -9,6 +9,14 @@ import java.util.*;
 @WebServlet("/index")
 public class DiaryListServlet extends HttpServlet {
 
+    private String esc(String s) {
+        if (s == null) return "";
+        return s.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;");
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,7 +64,7 @@ public class DiaryListServlet extends HttpServlet {
         out.println("<div class='d-flex justify-content-between mb-3'>");
 
         if (user != null) {
-            out.println("<div>Welcome, <strong>" + user + "</strong></div>");
+            out.println("<div>Welcome, <strong>" + esc(user) + "</strong></div>");
             out.println("<a href='logout' class='btn btn-danger'>Logout</a>");
         } else {
             out.println("<div>Not logged in</div>");
@@ -96,16 +104,16 @@ public class DiaryListServlet extends HttpServlet {
                 reader.close();
 
                 out.println("<tr>");
-                out.println("<td>" + date + "</td>");
-                out.println("<td>" + title + "</td>");
+                out.println("<td>" + esc(date) + "</td>");
+                out.println("<td>" + esc(title) + "</td>");
                 out.println("<td>");
-                out.println("<a href='view?file=" + file.getName() + "' class='btn btn-sm btn-success'>View</a> ");
-                out.println("<a href='edit?file=" + file.getName() + "' class='btn btn-sm btn-warning'>Edit</a>");
-//                if (user != null) {
-                    out.println("<a href='delete?file=" + file.getName() + "' ");
+                out.println("<a href='view?file=" + esc(file.getName()) + "' class='btn btn-sm btn-success'>View</a> ");
+                if (user != null) {
+                out.println("<a href='edit?file=" + esc(file.getName()) + "' class='btn btn-sm btn-warning'>Edit</a>");
+                    out.println("<a href='delete?file=" + esc(file.getName()) + "' ");
                     out.println("class='btn btn-sm btn-danger' ");
                     out.println("onclick=\"return confirm('Delete this diary?')\">Delete</a>");
-//                }
+                }
                 out.println("</td>");
                 out.println("</tr>");
             }
