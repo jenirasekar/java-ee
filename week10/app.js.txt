@@ -1,0 +1,11 @@
+// Teaching note: JavaScript example for 3.1.2 How to Install Node.js.
+// Define a reusable function.
+function sum(a, b){
+// Return the result to the caller.
+    return a + b;
+}
+// Define a reusable function.
+function main(){
+    console.log(sum(10, 20))
+}
+main()

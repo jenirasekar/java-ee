@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 1. let is only valid inside the current block.
+    {
+      let a = 1
+      var b = 2
+    }
+    // console.log(a);  // Error: a is not defined
+    console.log(b);  // 2
+
+    // 2. let cannot be declared repeatedly.
+    let name = 'Tom'
+    // let name = 'Jerry' // Error
+
+    // 3. let should be declared before use.
+    // console.log(test) // undefined
+    var test = 'test'
+
+    // console.log(test1) // Error
+    let test1 = 'test1'
+
+    // 4. let variables do not become window properties.
+    var x = 100
+    console.log(window.x) // 100
+
+    let y = 200
+    console.log(window.y) // undefined
+
+    // 5. let is recommended in loops.
+    for (let i = 0; i < 10; i++) {
+      console.log(i)
+    }
+
+
+     const PI = 3.1415926;
+
+    // const A; // Error: const must be initialized.
+
+    const A = 'atguigu'
+    // A = 'xx' // Error: cannot reassign a const variable.
+
+    {
+        const B = 'block value'
+        console.log(B)
+    }
+
+    const TEAM = ['Andy', 'Jacky', 'Aaron'];
+    TEAM.push('Leon'); // Allowed: the array address is unchanged.
+    // TEAM = []       // Error: reassignment is not allowed.
+
+    let ulStr =
+        '<ul>'+
+        '<li>JAVA</li>'+
+        '<li>HTML</li>'+
+        '<li>VUE</li>'+
+        '</ul>'
+
+    let ulStr2 = `
+        <ul>
+            <li>JAVA</li>
+            <li>HTML</li>
+            <li>VUE</li>
+        </ul>`
+
+    let name2 = 'Zhang Xiaoming'
+    let infoStr = `${name} was selected as an excellent student this year.`
+    console.log(infoStr)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
