@@ -73,6 +73,34 @@
     </script>
 </head>
 <body>
-    
+    <script>
+        // Script section: write JavaScript logic here.
+    // Create an array that stores programming languages.
+    let arr = ['java', 'c', 'python'];
+
+    // Create an object named person.
+    // The language property stores the arr array.
+    let person = {
+        name: 'Zhang San',
+        language: arr
+    };
+
+    // Create a deep copy of the person object.
+    // JSON.stringify(person) converts the object into a JSON string.
+    // JSON.parse(...) converts the JSON string back into a new object.
+    // Therefore, person2 is a new object, not the same object as person.
+    let person2 = JSON.parse(JSON.stringify(person));
+
+    // Modify the name property of person2.
+    person2.name = "Xiao Hei";
+
+    // Print the name property of the original person object.
+    // Output: Zhang San
+    console.log(person.name);
+
+    // Print the name property of the copied person2 object.
+    // Output: Xiao Hei
+    console.log(person2.name);
+    </script>
 </body>
 </html>

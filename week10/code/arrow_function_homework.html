@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Arrow Function Homework</title>
+    <style>
+        .color-box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="color-box" id="colorBox"></div>
+
+    <script>
+        const box = document.getElementById('colorBox');
+
+        box.addEventListener('click', function() {
+            setTimeout(() => {
+                box.style.backgroundColor = 'pink';
+            }, 2000); 
+        });
+    </script>
+</body>
+</html>
