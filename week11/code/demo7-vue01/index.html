@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- 
+    This example demonstrates how to quickly use Vue 3 
+    without engineering tools such as Vite or Vue CLI.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 3 Quick Demo</title>
+</head>
+<body>
+
+    <!-- 
+        Import Vue 3 from CDN.
+        This allows us to use Vue directly in an HTML file.
+    -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- 
+        This is the root element of the Vue application.
+        Vue will control everything inside this div.
+    -->
+    <div id="app">
+
+       <!-- 
+            v-bind:style binds the style attribute to the variable colorStyle.
+            {{ headline }} uses interpolation to display the value of headline.
+       -->
+       <h1 v-bind:style="colorStyle">{{ headline }}</h1>
+
+       <!-- 
+            v-text is used to set the text content of this paragraph.
+            It will display the value of article.
+       -->
+       <p v-text="article"></p>
+
+       <!-- 
+            v-bind:type binds the input type to the variable inputType.
+            Here, inputType is 'text', so this input is a text box.
+       -->
+       <input v-bind:type="inputType" value="helloVue3"> 
+       <br>
+
+       <!-- 
+            @click is the shorthand for v-on:click.
+            When the button is clicked, the sayHello function will be executed.
+       -->
+       <button @click="sayHello()">hello</button>
+    </div>
+
+    <script>
+        // Create a Vue application.
+        const app = Vue.createApp({
+
+            // setup() is the entry function of the Composition API in Vue 3.
+            // Variables and functions defined here can be used in the template
+            // only if they are returned.
+            setup() {
+
+                // Define the type of the input element.
+                let inputType = 'text';
+
+                // Define the text displayed in the h1 element.
+                let headline = 'hello vue3';
+
+                // Define the text displayed in the paragraph.
+                let article = 'vue is awesome';
+
+                // Define the style object for the h1 element.
+                // The text color will be red.
+                let colorStyle = {
+                    'color': 'red'
+                };
+
+                // Define a function.
+                // This function will be called when the button is clicked.
+                let sayHello = () => {
+                    alert("hello Vue");
+                };
+
+                // Return variables and functions to the template.
+                // Only returned data can be used in the HTML template.
+                return {
+                   inputType,
+                   headline,
+                   article,
+                   colorStyle,
+                   sayHello
+                };
+            }
+        });
+
+        // Mount the Vue application to the element whose id is app.
+        // After mounting, Vue will control the content inside <div id="app">.
+        app.mount("#app");
+    </script>
+
+</body>
+</html>
