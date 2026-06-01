@@ -4,14 +4,14 @@
   defineUser is used to get the current logged-in user.
   defindSchedule is used to store the schedule list.
 */
-import { defineUser } from '../store/userStore.js'
-import { defindSchedule } from '../store/scheduleStore.js'
+import { defineUser } from "../store/userStore.js";
+import { defindSchedule } from "../store/scheduleStore.js";
 
-import { onMounted } from 'vue'
+import { onMounted } from "vue";
 
 // Get Pinia store objects
-let sysUser = defineUser()
-let schedule = defindSchedule()
+let sysUser = defineUser();
+let schedule = defindSchedule();
 
 /*
   Get the current username.
@@ -21,7 +21,7 @@ let schedule = defindSchedule()
   so we can also read the username from sessionStorage.
 */
 function getCurrentUsername() {
-  return sysUser.username || sessionStorage.getItem('loginUser') || 'guest'
+  return sysUser.username || sessionStorage.getItem("loginUser") || "guest";
 }
 
 /*
@@ -33,7 +33,7 @@ function getCurrentUsername() {
   scheduleList_jack
 */
 function getStorageKey() {
-  return 'scheduleList_' + getCurrentUsername()
+  return "scheduleList_" + getCurrentUsername();
 }
 
 /*
@@ -42,29 +42,29 @@ function getStorageKey() {
   This function is called when the component is mounted.
 */
 function loadSchedule() {
-  let storageKey = getStorageKey()
-  let savedList = localStorage.getItem(storageKey)
+  let storageKey = getStorageKey();
+  let savedList = localStorage.getItem(storageKey);
 
   if (savedList) {
     // If there is saved schedule data, convert JSON string to array
-    schedule.itemList = JSON.parse(savedList)
+    schedule.itemList = JSON.parse(savedList);
   } else {
     // If there is no saved data, create some default schedule items
     schedule.itemList = [
       {
         sid: 1,
-        title: 'Learn Vue Router',
-        completed: '0'
+        title: "Learn Vue Router",
+        completed: "0",
       },
       {
         sid: 2,
-        title: 'Practice schedule management',
-        completed: '1'
-      }
-    ]
+        title: "Practice schedule management",
+        completed: "1",
+      },
+    ];
 
     // Save the default data into localStorage
-    saveSchedule()
+    saveSchedule();
   }
 }
 
@@ -75,8 +75,8 @@ function loadSchedule() {
   so we need to convert the schedule list to a JSON string.
 */
 function saveSchedule() {
-  let storageKey = getStorageKey()
-  localStorage.setItem(storageKey, JSON.stringify(schedule.itemList))
+  let storageKey = getStorageKey();
+  localStorage.setItem(storageKey, JSON.stringify(schedule.itemList));
 }
 
 /*
@@ -84,8 +84,8 @@ function saveSchedule() {
   load all schedules of the current user.
 */
 onMounted(() => {
-  loadSchedule()
-})
+  loadSchedule();
+});
 
 /*
   Add a new empty schedule item.
@@ -99,14 +99,14 @@ onMounted(() => {
 function addItem() {
   let newItem = {
     sid: Date.now(),
-    title: '',
-    completed: '0'
-  }
+    title: "",
+    completed: "0",
+  };
 
-  schedule.itemList.push(newItem)
-  saveSchedule()
+  schedule.itemList.push(newItem);
+  saveSchedule();
 
-  alert('Schedule added successfully.')
+  alert("Schedule added successfully.");
 }
 
 /*
@@ -116,15 +116,15 @@ function addItem() {
   by v-model. So we only need to save the whole list to localStorage.
 */
 function updateItem(index) {
-  let item = schedule.itemList[index]
+  let item = schedule.itemList[index];
 
   if (!item.title.trim()) {
-    alert('Schedule content cannot be empty.')
-    return
+    alert("Schedule content cannot be empty.");
+    return;
   }
 
-  saveSchedule()
-  alert('Schedule updated successfully.')
+  saveSchedule();
+  alert("Schedule updated successfully.");
 }
 
 /*
@@ -136,16 +136,16 @@ function updateItem(index) {
   In this pure front-end version, we delete it from the array directly.
 */
 function removeItem(index) {
-  let result = confirm('Are you sure you want to delete this schedule?')
+  let result = confirm("Are you sure you want to delete this schedule?");
 
   if (!result) {
-    return
+    return;
   }
 
-  schedule.itemList.splice(index, 1)
-  saveSchedule()
+  schedule.itemList.splice(index, 1);
+  saveSchedule();
 
-  alert('Schedule deleted successfully.')
+  alert("Schedule deleted successfully.");
 }
 </script>
 
@@ -154,63 +154,44 @@ function removeItem(index) {
     <h3 class="ht">Your Schedule List</h3>
 
     <table class="tab" cellspacing="0px">
-      <tr class="ltr">
-        <th>No.</th>
-        <th>Content</th>
-        <th>Status</th>
-        <th>Operation</th>
-      </tr>
+      <thead>
+        <tr class="ltr">
+          <th>No.</th>
+          <th>Content</th>
+          <th>Status</th>
+          <th>Operation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ltr" v-for="(item, index) in schedule.itemList" :key="item.sid">
+          <td v-text="index + 1"></td>
 
-      <tr
-        class="ltr"
-        v-for="(item, index) in schedule.itemList"
-        :key="item.sid"
-      >
-        <td v-text="index + 1"></td>
+          <td>
+            <input class="ipt" type="text" v-model="item.title" placeholder="Please enter schedule content" />
+          </td>
 
-        <td>
-          <input
-            class="ipt"
-            type="text"
-            v-model="item.title"
-            placeholder="Please enter schedule content"
-          />
-        </td>
+          <td>
+            <input type="radio" value="1" v-model="item.completed" />
+            Completed
 
-        <td>
-          <input
-            type="radio"
-            value="1"
-            v-model="item.completed"
-          />
-          Completed
+            <input type="radio" value="0" v-model="item.completed" />
+            Not completed
+          </td>
 
-          <input
-            type="radio"
-            value="0"
-            v-model="item.completed"
-          />
-          Not completed
-        </td>
+          <td class="buttonContainer">
+            <button class="btn1" @click="removeItem(index)">Delete</button>
 
-        <td class="buttonContainer">
-          <button class="btn1" @click="removeItem(index)">
-            Delete
-          </button>
-
-          <button class="btn1" @click="updateItem(index)">
-            Save
-          </button>
-        </td>
-      </tr>
-
-      <tr class="ltr buttonContainer">
-        <td colspan="4">
-          <button class="btn1" @click="addItem()">
-            Add Schedule
-          </button>
-        </td>
-      </tr>
+            <button class="btn1" @click="updateItem(index)">Save</button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr class="ltr buttonContainer">
+          <td colspan="4">
+            <button class="btn1" @click="addItem()">Add Schedule</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>

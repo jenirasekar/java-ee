@@ -28,13 +28,12 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach((to, from, next) => {
-    const isLogin = sessionStorage.getItem('isLogin')
-    if (to.path === '/showSchedule' && !isLogin) {
-        next('/login')
-    } else {
-        next()
+router.beforeEach((to, from) => {
+    const isLogin = sessionStorage.getItem("isLogin");
+
+    if (to.path === "/showSchedule" && isLogin !== "true") {
+        return "/login";
     }
-})
+});
 
 export default router
